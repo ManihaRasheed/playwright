@@ -4,7 +4,7 @@ import {chromium, test} from "@playwright/test"
 
 test ("doctorz", async () => {
     const browser = await chromium.launch({
-            headless:false
+            headless:true
         }
     );  
     const context = await browser.newContext(); //new browser context

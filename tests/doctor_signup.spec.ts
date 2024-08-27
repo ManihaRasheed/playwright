@@ -2,7 +2,7 @@ import { test, expect, Browser, Page, chromium } from '@playwright/test';
 
 test('doctor signup and login', async ({}) => {
 
-    const browser: Browser = await chromium.launch({ headless: false });
+    const browser: Browser = await chromium.launch({ headless: true });
     const page: Page = await browser.newPage();
 
 await page.goto("https://doctor.vaccinationcentre.com/login")

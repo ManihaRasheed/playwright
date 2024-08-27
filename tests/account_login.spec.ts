@@ -5,7 +5,7 @@ test('login test', async() => {
 
 // Launch Firefox browser in non-headless mode
 
-    const browser: Browser = await firefox.launch({headless: false})
+    const browser: Browser = await firefox.launch({headless: true})
     const page: Page= await browser.newPage();
 
 // Navigate to the login page

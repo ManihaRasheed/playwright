@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 test('Gmail Sign-In', async () => {
 
     const browser = await chromium.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-web-security',
             '--disable-blink-features=AutomationControlled',

@@ -5,7 +5,7 @@ test('register test', async() => {
 
 // Launch Chromium browser in non-headless mode
 
-    const browser: Browser = await chromium.launch({headless: false})
+    const browser: Browser = await chromium.launch({headless: true})
     const page: Page= await browser.newPage();
 
 // Navigate to the register page

@@ -2,7 +2,7 @@ import { test, expect, Browser, Page, chromium } from '@playwright/test';
 
 test('doctor forgot password', async ({}) => {
 
-    const browser: Browser = await chromium.launch({ headless: false });
+    const browser: Browser = await chromium.launch({ headless: true });
     const page: Page = await browser.newPage();
 
     // Navigate to the login page
