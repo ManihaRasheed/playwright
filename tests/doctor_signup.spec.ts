@@ -1,31 +1,26 @@
 import { test, expect } from '@playwright/test';
 
-test('Doctor login test', async ({ page }) => {
-    // Navigate to the login page
-    await page.goto("https://doctor.vaccinationcentre.com/login");
+test('Doctor Login Test', async ({ page }) => {
+  // Get mobile number and password from environment variables
+  const mobileNumber = process.env.MOBILE_NUMBER;
+  const password = process.env.PASSWORD;
 
-    // Fill in the login credentials
-    console.log("SIGNUP_PHONE:", process.env.SIGNUP_PHONE);
+  if (!mobileNumber || !password) {
+    throw new Error('MOBILE_NUMBER and PASSWORD environment variables must be set');
+  }
 
+  // Navigate to the login page
+  await page.goto('https://doctor.vaccinationcentre.com/login');
 
-   // Use getByPlaceholder if the input field has a placeholder attribute
-await page.getByPlaceholder('Enter your mobile number').fill(process.env.SIGNUP_PHONE || '');
+  // Enter the mobile number
+  await page.fill('input[name="mobile"]', mobileNumber);
 
-// Or use a CSS selector directly
-await page.locator('input[name="mobile"]').fill(process.env.SIGNUP_PHONE || '');
+  // Enter the password
+  await page.fill('input[name="password"]', password);
 
-console.log("PASSWORD:", process.env.PASSWORD);
-await page.getByPlaceholder('Enter your password').fill(process.env.PASSWORD || '');
+  // Click the login button
+  await page.click('button[type="submit"]');
 
-// Or use a CSS selector directly
-await page.locator('input[name="mobile"]').fill(process.env.PASSWORD || '');
-
-    // Click the login button
-    await page.getByRole('button', { name: 'Login' }).click();
-
-    // Verify successful login (this will depend on the app's behavior post-login)
-    // Example: Check if a logout button or a dashboard element appears
-    await expect(page.getByRole('button', { name: 'Logout' })).toBeVisible();
-
-    // Perform any additional checks
+  // Add assertion to verify successful login
+  await expect(page).toHaveURL('https://doctor.vaccinationcentre.com/dashboard');
 });
