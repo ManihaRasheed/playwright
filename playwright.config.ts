@@ -4,7 +4,7 @@ const config: PlaywrightTestConfig = {
   timeout: 90000,
   use: {
     baseURL: 'https://naveenautomationlabs.com/opencart/index.php',
-    headless: true,
+    headless: false,
     screenshot: 'only-on-failure', // Capture screenshots on failure
   },
   projects: [
