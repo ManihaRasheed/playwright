@@ -2,6 +2,11 @@ import { test, expect, Browser, Page, chromium } from '@playwright/test';
 
 test('doctor signup and login', async () => {
 
+    // Log environment variables for debugging
+    console.log("SIGNUP_EMAIL:", process.env.SIGNUP_EMAIL);
+    console.log("SIGNUP_PHONE:", process.env.SIGNUP_PHONE);
+    console.log("PASSWORD:", process.env.PASSWORD);
+
     // Launch browser
     const browser: Browser = await chromium.launch({ headless: true });
     const page: Page = await browser.newPage();
