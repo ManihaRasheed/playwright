@@ -1,39 +1,19 @@
-import { test, expect, Browser, Page, chromium } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('doctor signup and login', async () => {
-
-    // Log environment variables for debugging
-    console.log("SIGNUP_EMAIL:", process.env.SIGNUP_EMAIL);
-    console.log("SIGNUP_PHONE:", process.env.SIGNUP_PHONE);
-    console.log("PASSWORD:", process.env.PASSWORD);
-
-    // Launch browser
-    const browser: Browser = await chromium.launch({ headless: true });
-    const page: Page = await browser.newPage();
-
+test('Doctor login test', async ({ page }) => {
     // Navigate to the login page
     await page.goto("https://doctor.vaccinationcentre.com/login");
 
-    // Perform signup
-    await page.getByRole('link', { name: 'Signup' }).click();
-    await page.getByLabel('Qualification').fill('mbbs');
-    await page.getByLabel('Design Your Letterpad').fill('dfefesd');
-    await page.getByLabel('First Name').fill('dr');
-    await page.getByLabel('Last Name').fill('ahmad');
-    await page.getByLabel('Display Name').fill('dr ahmad');
-    await page.getByLabel('Email').fill(process.env.SIGNUP_EMAIL || '');
-    await page.getByLabel('Mobile Number With WhatsApp').fill(process.env.SIGNUP_PHONE || '');
-    await page.getByLabel('Appointment Number').fill('34657688');
-    await page.getByRole('button', { name: 'Sign Up' }).click();
+    // Fill in the login credentials
+    await page.getByLabel('Mobile Number').fill(process.env.SIGNUP_PHONE || '');
+    await page.getByLabel('Password').fill(process.env.PASSWORD || '');
 
-    // Perform password reset
-    await page.locator('a').filter({ hasText: 'Forget Password' }).click();
-    await page.getByRole('textbox').fill(process.env.SIGNUP_EMAIL || '');
-    await page.getByRole('button', { name: 'log in   Send Password' }).click();
-    await page.locator('input[name="ion-input-0"]').fill(process.env.SIGNUP_PHONE || '');
-    await page.locator('input[name="ion-input-1"]').fill(process.env.PASSWORD || '');
-    await page.getByRole('button', { name: 'log in   Login' }).click();
+    // Click the login button
+    await page.getByRole('button', { name: 'Login' }).click();
 
-    // Close the browser
-    await browser.close();
+    // Verify successful login (this will depend on the app's behavior post-login)
+    // Example: Check if a logout button or a dashboard element appears
+    await expect(page.getByRole('button', { name: 'Logout' })).toBeVisible();
+
+    // Perform any additional checks
 });
