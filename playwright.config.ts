@@ -1,7 +1,7 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-  timeout: 90000,
+  timeout: 30000,
   use: {
     baseURL: 'https://naveenautomationlabs.com/opencart/index.php',
     headless: true,
