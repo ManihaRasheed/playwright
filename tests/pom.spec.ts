@@ -34,3 +34,12 @@ test('POM Register and Login', async ({ page }) => {
     // Validate that the login was successful
     expect(loginTitle).toEqual('My Account');
 });
+
+
+
+
+
+
+
+
+
