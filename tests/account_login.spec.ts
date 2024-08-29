@@ -1,11 +1,11 @@
 import {test, expect, Browser, Page} from '@playwright/test'
-import {webkit, chromium, firefox} from 'playwright'
+import {chromium} from 'playwright'
 
 test('login test', async() => {
 
 // Launch Firefox browser in non-headless mode
 
-    const browser: Browser = await firefox.launch({headless: true})
+    const browser: Browser = await chromium.launch({headless: true})
     const page: Page= await browser.newPage();
 
 // Navigate to the login page
