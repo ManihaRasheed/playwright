@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 test('login test', async () => {
     // Launch Chromium browser
-    const browser: Browser = await chromium.launch({ headless: false });
+    const browser: Browser = await chromium.launch({ headless: true });
     const page: Page = await browser.newPage();
 
     // Navigate to the login page
