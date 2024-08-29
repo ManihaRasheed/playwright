@@ -9,11 +9,11 @@ on:
       - master
 
 jobs:
-  test:
+  e2e:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Node.js
@@ -24,15 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Playwright browsers
-        run: npx playwright install
-
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+    
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --reporter=dot
 
-      - name: Upload test screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v3
         with:
-          name: screenshots
-          path: homepage.png
+            name: playwright-report
+            path: playwright-report/
