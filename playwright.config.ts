@@ -14,9 +14,12 @@ const config: PlaywrightTestConfig = {
     },
 
   ],
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report' }]],
 };
 
-export default config;
+
+
+
+
+
+

@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  e2e:
+  home:
     runs-on: ubuntu-latest
 
     steps:

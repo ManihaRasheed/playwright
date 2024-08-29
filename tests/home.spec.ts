@@ -48,12 +48,6 @@ test("Extract text content from multiple elements of navigation links", async ({
 })
 
 
-/*test('test inspection', async ({ page }) => {
-    await page.goto('https://ecommerce-playground.lambdatest.io/');
-    await page.locator('#entry_217945').click();
-    await page.getByRole('button', { name: 'AddOns Featured' }).click();
-    await page.getByRole('button', { name: 'AddOns Featured' }).click();
-});*/
 
 test('test inspection', async ({ page }) => {
     await page.goto('https://ecommerce-playground.lambdatest.io/');
