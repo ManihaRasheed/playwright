@@ -3,10 +3,10 @@ name: Playwright Tests
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   test:
@@ -38,3 +38,9 @@ jobs:
 
     - name: Run Playwright tests
       run: xvfb-run --auto-servernum npx playwright test --project=${{ matrix.browser }}
+    
+    - name: Upload Playwright Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: playwright-report
+        path: playwright-report/
