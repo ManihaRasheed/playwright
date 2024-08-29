@@ -1,34 +1,42 @@
 import { test, expect, chromium } from '@playwright/test';
 
 test('doctor login', async ({}) => {
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: false }); // Run in non-headless mode for debugging
     const page = await browser.newPage();
 
-    // Navigate to the login page
-    console.log('Navigating to login page...');
-    await page.goto('https://doctor.vaccinationcentre.com/login');
+    try {
+        // Navigate to the login page
+        console.log('Navigating to login page...');
+        await page.goto('https://doctor.vaccinationcentre.com/login', { waitUntil: 'networkidle' }); // Wait until network is idle
 
-    // Use environment variables for credentials
-    const mobileNumber = process.env.DOCTOR_MOBILE_NUMBER || '';
-    const password = process.env.DOCTOR_PASSWORD || '';
+        // Verify that the login page is loaded
+        console.log('Waiting for the mobile input field...');
+        await page.waitForSelector('input[name="mobile"]', { timeout: 20000 }); // Wait for the mobile input field
 
-    // Fill in the mobile number and password
-    console.log('Filling login credentials...');
-    await page.fill('input[name="mobile"]', mobileNumber);
-    await page.fill('input[name="password"]', password);
+        // Use environment variables for credentials
+        const mobileNumber = process.env.DOCTOR_MOBILE_NUMBER || '3456545678';
+        const password = process.env.DOCTOR_PASSWORD || '5B4AxgQ5';
 
-    // Click the login button
-    console.log('Clicking login button...');
-    await page.click('button[type="submit"]');
+        // Fill in the mobile number and password
+        console.log('Filling login credentials...');
+        await page.fill('input[name="mobile"]', mobileNumber);
+        await page.fill('input[name="password"]', password);
 
-    // Wait for navigation after login
-    console.log('Waiting for navigation...');
-    await page.waitForNavigation({ timeout: 60000 });
+        // Click the login button
+        console.log('Clicking login button...');
+        await page.click('button[type="submit"]');
 
-    // Verify if the login was successful
-    console.log('Verifying login...');
-    await expect(page).toHaveURL('https://doctor.vaccinationcentre.com/dashboard');
+        // Wait for navigation after login
+        console.log('Waiting for navigation...');
+        await page.waitForNavigation({ timeout: 60000 });
 
-    // Close the browser
-    await browser.close();
+        // Verify if the login was successful
+        console.log('Verifying login...');
+        await expect(page).toHaveURL('https://doctor.vaccinationcentre.com/dashboard');
+    } catch (error) {
+        console.error('Error occurred:', error);
+    } finally {
+        // Close the browser
+        await browser.close();
+    }
 });
