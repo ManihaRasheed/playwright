@@ -37,10 +37,14 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
+      env:
+        DOCTOR_MOBILE_NUMBER: ${{ secrets.DOCTOR_MOBILE_NUMBER }}
+        DOCTOR_PASSWORD: ${{ secrets.DOCTOR_PASSWORD }}
       run: xvfb-run --auto-servernum npx playwright test --project=${{ matrix.browser }}
-    
+
     - name: Upload Playwright Report
       uses: actions/upload-artifact@v3
       with:
         name: playwright-report
         path: playwright-report/
+        

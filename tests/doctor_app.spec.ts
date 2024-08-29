@@ -1,3 +1,4 @@
+
 import { test, expect, Browser, Page, chromium } from '@playwright/test';
 
 test('doctor login', async ({}) => {
@@ -8,11 +9,15 @@ test('doctor login', async ({}) => {
     // Navigate to the login page
     await page.goto('https://doctor.vaccinationcentre.com/login');
 
+    // Use environment variables for credentials
+    const mobileNumber = process.env.DOCTOR_MOBILE_NUMBER || '';
+    const password = process.env.DOCTOR_PASSWORD || '';
+
     // Fill in the mobile number
-  await page.fill('input[name="mobile"]', '3456545678');
+    await page.fill('input[name="mobile"]', mobileNumber);
   
-  // Fill in the password
-  await page.fill('input[name="password"]', '5B4AxgQ5');
+    // Fill in the password
+    await page.fill('input[name="password"]', password);
 
     // Click the login button
     await page.click('button[type="submit"]');
@@ -20,13 +25,11 @@ test('doctor login', async ({}) => {
     // Wait for navigation after login
     await page.waitForNavigation();
 
-    // verify if the login was successful
-   
+    // Verify if the login was successful
     await expect(page).toHaveURL('https://doctor.vaccinationcentre.com/dashboard');
-    // or
-    // await expect(page.locator('text=Logout')).toBeVisible();
-
+    
     // Close the browser
     await browser.close();
 });
+
 
