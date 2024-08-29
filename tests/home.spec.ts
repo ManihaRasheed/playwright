@@ -48,9 +48,20 @@ test("Extract text content from multiple elements of navigation links", async ({
 })
 
 
-test('test inspection', async ({ page }) => {
+/*test('test inspection', async ({ page }) => {
     await page.goto('https://ecommerce-playground.lambdatest.io/');
     await page.locator('#entry_217945').click();
+    await page.getByRole('button', { name: 'AddOns Featured' }).click();
+    await page.getByRole('button', { name: 'AddOns Featured' }).click();
+});*/
+
+test('test inspection', async ({ page }) => {
+    await page.goto('https://ecommerce-playground.lambdatest.io/');
+    
+    const entry = page.locator('#entry_217945');
+    await entry.waitFor({ state: 'visible', timeout: 30000 }); // Wait for element to be visible
+    await entry.click(); // Click the element
+
     await page.getByRole('button', { name: 'AddOns Featured' }).click();
     await page.getByRole('button', { name: 'AddOns Featured' }).click();
 });
