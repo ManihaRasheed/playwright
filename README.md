@@ -1,2 +1,3 @@
-# playwright
-practice of page object method typescript
+#playwright with typescript
+
+using page object model
